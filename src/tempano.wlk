@@ -1,28 +1,53 @@
 class Tempano {
-	var estado = compacto
 	var peso
-	constructor(_peso){
+	var estado= compacto
+	constructor (_peso){
 		peso=_peso
 	}
-	method cambiarEstado(nuevoEstado){
-		estado = nuevoEstado
-	}
-	method parteVisible(){
-		return peso*0.15
+	method cambiarEstado (){
+		estado= aireado
 	}
 	method seVeAzul(){
-		return estado.seVeAzul(self)
+		estado.seVeAzul(self)
+	}
+	method pesoParteVisible(){
+		return peso*0.15
+	}
+	method cuantoEnfriaElAgua(){
+		estado.enfriaElAgua(self)
+	}
+	method centecimaPartePeso(){
+		return peso/100
+	}
+	method esGrande(){
+		return peso>500
+	}
+	method estado()=estado
+	method reducirMasa(valor){
+		peso-=valor
+		if (self.esGrande()&& estado.esCompacto()){
+			self.cambiarEstado()
+		}
 	}
 }
 
-
-
-object compacto{
+object compacto {
 	method seVeAzul(tempano){
-		return tempano.parteVisible() > 100
+		return tempano.parteVisible()>=100
+}
+	method enfriaElAgua(tempano){
+		return tempano.centecimaPartePeso()
 	}
+	method esCompacto()=true
+
 }
 
-object aireado{
-	method seVeAzul(tempano) = false
+object aireado {
+	method seVeAzul(tempano){
+		return false
+}
+	method enfriaElAgua(tempano){
+		return 0.5
+	}
+	method esCompacto()=false
 }
