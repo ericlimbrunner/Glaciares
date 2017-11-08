@@ -3,22 +3,19 @@ class MasaDeAgua{
 	var temperaturaAmbiente=10
 	method agregarTempano(tempano){
 		tempanos.add(tempano)
-}
+	}
 	method esAtractivo(){
-		return self.masDeCincoTempanosFlotando() and self.todosTempanosCumplen() or self.todosTempanosAzules()
-}
+		return self.masDeCincoTempanosFlotando() && self.todosTempanosAzulesOGrandes()
+	}
 	method masDeCincoTempanosFlotando(){
 		return tempanos.size()>=5
-}
-	method todosTempanosCumplen(){
-		return tempanos.all({tempano=>tempano.esGrande()})
-}
-	method todosTempanosAzules(){
-		return tempanos.all({tempano=>tempano.seVeAzul()})
-}
+	}
+	method todosTempanosAzulesOGrandes(){
+		return tempanos.all({tempano=>tempano.esGrande() || tempano.seVeAzul()})
+	}
 	method temperatura(){
 		return temperaturaAmbiente - self.enfriamientoTotal()
-}
+	}
 	method enfriamientoTotal(){
 		return tempanos.sum({tempano=>tempano.cuantoEnfriaElAgua()})
 	}

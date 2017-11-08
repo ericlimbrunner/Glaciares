@@ -1,3 +1,4 @@
+class NavegacionException inherits Exception{}
 class Embarcacion{
 	var tamanio
 	var fuerza
@@ -12,6 +13,9 @@ class Embarcacion{
 	method navegar(masaDeAgua){
 		if (self.puedeNavegar(masaDeAgua)){
 			masaDeAgua.hacerEfecto()
+		}
+		else{
+			throw new NavegacionException("No puede navegar en la masa de agua deseada")
 		}
 	}
 }
